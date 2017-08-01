@@ -4,10 +4,8 @@ from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
-data = np.loadtxt('imu_lift_data.csv', delimiter=',')
-targets = np.loadtxt('lift_target_data.csv', delimiter=',')
-single_target = np.loadtxt('single_target_data.csv')
-
+data = np.loadtxt('acceleration_data.csv', delimiter=',')
+targets = np.loadtxt('target_data.csv', delimiter=',')
 
 avg = np.mean(data, axis=0)
 
@@ -17,8 +15,8 @@ data_scaled = np.subtract(data, avg)
 
 data_scaled = np.divide(data_scaled, stdev)
 
-#X_train, X_test, y_train, y_test = train_test_split(data_scaled, single_target, random_state=0)
-X_train, X_test, y_train, y_test = train_test_split(data, single_target, random_state=0)
+#X_train, X_test, y_train, y_test = train_test_split(data_scaled, targets, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(data, targets, random_state=0)
 
 lift_SVC = LinearSVC().fit(X_train,y_train)
 print("SVM")

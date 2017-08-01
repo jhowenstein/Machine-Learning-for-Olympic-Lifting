@@ -86,20 +86,20 @@ for q = 1:N_SS
 
     vertAccel = Vert_Accel(S:E);
     horAccel = Hor_Accel(S:E);
+    magAccel = accel_mag(S:E);
 
     PULL_INDEX = PULL_FRAMES * (100/N_PULL);
     INT_INDEX = 1:100;
 
     VERT_ACCEL_INT = interp1(PULL_INDEX,vertAccel,INT_INDEX,'spline');
     HOR_ACCEL_INT = interp1(PULL_INDEX,horAccel,INT_INDEX,'spline');
+    MAG_ACCEL_INT = interp1(PULL_INDEX,magAccel,INT_INDEX,'spline');
 
     row_counter = row_counter + 1;
-    output_row = [VERT_ACCEL_INT,HOR_ACCEL_INT];
-    target_row = [1,0,0,0];
+    output_row = [VERT_ACCEL_INT,HOR_ACCEL_INT,MAG_ACCEL_INT];
     
     output_data(row_counter,:) = output_row;
-    target_data(row_counter,:) = target_row;
-    single_target(row_counter,1) = 0;
+    target_data(row_counter,1) = 0;
     
 end
 
@@ -175,20 +175,20 @@ for q = 1:N_PS
 
     vertAccel = Vert_Accel(S:E);
     horAccel = Hor_Accel(S:E);
+    magAccel = accel_mag(S:E);
 
     PULL_INDEX = PULL_FRAMES * (100/N_PULL);
     INT_INDEX = 1:100;
 
     VERT_ACCEL_INT = interp1(PULL_INDEX,vertAccel,INT_INDEX,'spline');
     HOR_ACCEL_INT = interp1(PULL_INDEX,horAccel,INT_INDEX,'spline');
-
+    MAG_ACCEL_INT = interp1(PULL_INDEX,magAccel,INT_INDEX,'spline');
+    
     row_counter = row_counter + 1;
-    output_row = [VERT_ACCEL_INT,HOR_ACCEL_INT];
-    target_row = [0,1,0,0];
+    output_row = [VERT_ACCEL_INT,HOR_ACCEL_INT,MAG_ACCEL_INT];
     
     output_data(row_counter,:) = output_row;
-    target_data(row_counter,:) = target_row;
-    single_target(row_counter,1) = 1;
+    target_data(row_counter,1) = 1;
 end
 
 for q = 1:N_SC
@@ -263,20 +263,20 @@ for q = 1:N_SC
 
     vertAccel = Vert_Accel(S:E);
     horAccel = Hor_Accel(S:E);
+    magAccel = accel_mag(S:E);
 
     PULL_INDEX = PULL_FRAMES * (100/N_PULL);
     INT_INDEX = 1:100;
 
     VERT_ACCEL_INT = interp1(PULL_INDEX,vertAccel,INT_INDEX,'spline');
     HOR_ACCEL_INT = interp1(PULL_INDEX,horAccel,INT_INDEX,'spline');
+    MAG_ACCEL_INT = interp1(PULL_INDEX,magAccel,INT_INDEX,'spline');
 
     row_counter = row_counter + 1;
-    output_row = [VERT_ACCEL_INT,HOR_ACCEL_INT];
-    target_row = [0,0,1,0];
+    output_row = [VERT_ACCEL_INT,HOR_ACCEL_INT,MAG_ACCEL_INT];
     
     output_data(row_counter,:) = output_row;
-    target_data(row_counter,:) = target_row;
-    single_target(row_counter,1) = 2;
+    target_data(row_counter,1) = 2;
 end
 
 for q = 1:N_PC
@@ -351,22 +351,21 @@ for q = 1:N_PC
 
     vertAccel = Vert_Accel(S:E);
     horAccel = Hor_Accel(S:E);
+    magAccel = accel_mag(S:E);
 
     PULL_INDEX = PULL_FRAMES * (100/N_PULL);
     INT_INDEX = 1:100;
 
     VERT_ACCEL_INT = interp1(PULL_INDEX,vertAccel,INT_INDEX,'spline');
     HOR_ACCEL_INT = interp1(PULL_INDEX,horAccel,INT_INDEX,'spline');
+    MAG_ACCEL_INT = interp1(PULL_INDEX,magAccel,INT_INDEX,'spline');
 
     row_counter = row_counter + 1;
-    output_row = [VERT_ACCEL_INT,HOR_ACCEL_INT];
-    target_row = [0,0,0,1];
+    output_row = [VERT_ACCEL_INT,HOR_ACCEL_INT,MAG_ACCEL_INT];
     
     output_data(row_counter,:) = output_row;
-    target_data(row_counter,:) = target_row;
-    single_target(row_counter,1) = 3;
+    target_data(row_counter,1) = 3;
 end
 
-csvwrite('imu_lift_data.csv',output_data)
-csvwrite('lift_target_data.csv',target_data)
-csvwrite('single_target_data.csv',single_target)
+csvwrite('acceleration_data.csv',output_data)
+csvwrite('target_data.csv',target_data)
